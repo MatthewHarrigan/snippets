@@ -968,6 +968,13 @@ const topicIds = [
   "c008ql15d7dt",
 ];
 
+import cliProgress from 'cli-progress'; 
+//const cliProgress = require('cli-progress');
+//const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+const bar1 = new cliProgress.Bar();
+bar1.start(webcoreTopicIds.length, 0);
+
+let i = 0;
 for (const topicId of webcoreTopicIds) {
   try {
     const response = await fetch(
@@ -981,4 +988,6 @@ for (const topicId of webcoreTopicIds) {
   } catch (error) {
     console.log(error);
   }
+ bar1.update(i);
+ i += 1;
 }
